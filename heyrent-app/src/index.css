@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "yekanbakh";
+  src: url("./assets/fonts/YekanBakh-Thin.woff2") format("woff2");
+  font-weight: 100;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+@font-face {
+  font-family: "yekanbakh";
+  src: url("./assets/fonts/YekanBakh-Regular.woff2") format("woff2");
+  font-weight: 200;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+@font-face {
+  font-family: "yekanbakh";
+  src: url("./assets/fonts/YekanBakh-SemiBold.woff") format("woff2");
+  font-weight: 300;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+@font-face {
+  font-family: "yekanbakh";
+  src: url("./assets/fonts/YekanBakh-Bold.woff2") format("woff2");
+  font-weight: 400;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+@font-face {
+  font-family: "yekanbakh";
+  src: url("./assets/fonts/YekanBakh-ExtraBold.woff2") format("woff2");
+  font-weight: 500;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+@font-face {
+  font-family: "yekanbakh";
+  src: url("./assets/fonts/YekanBakh-Black.woff2") format("woff2");
+  font-weight: 600;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+@font-face {
+  font-family: "yekanbakh";
+  src: url("./assets/fonts/YekanBakh-ExtraBlack.woff2") format("woff2");
+  font-weight: 700;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+
+@font-face {
+  font-family: "brand";
+  src: url("./assets/fonts/FontsFree-Net-Towards.woff") format("woff");
+  font-weight: 700;
+  /* Specify other font properties if desired (e.g., font-style) */
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "yekanbakh";
+  font-weight: 200;
+}
+
+.brand {
+  font-family: "brand";
+}
+
+*:disabled {
+  cursor: not-allowed;
+}
+
+*:disabled {
+  cursor: not-allowed;
+}
+
+select:disabled,
+input:disabled {
+  background: #363f48;
+}
+
+div {
+  --sb-track-color: color-mix(
+    in oklab,
+    oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+    black
+  );
+  --sb-thumb-color: oklch(var(--p));
+  --sb-size: 14px;
+}
+
+div::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+div::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 20px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 20px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  div {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+#bg-login::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #090e13d7;
+  z-index: 1;
+}

@@ -1,0 +1,15 @@
+a.active {
+  color: var(--fallback-p, oklch(var(--p) / var(--tw-bg-opacity)));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-p, oklch(var(--pc)));
+}
+a.active svg {
+  --tw-bg-opacity: 1;
+  stroke: var(--fallback-p, oklch(var(--p) / var(--tw-bg-opacity)));
+}
+a.active.icon {
+  background-color: transparent;
+}
+a.icon:hover {
+  background: transparent;
+}
