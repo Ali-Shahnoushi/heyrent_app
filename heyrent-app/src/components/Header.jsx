@@ -18,20 +18,16 @@ export default function Header() {
     else document.querySelector("html").setAttribute("data-theme", "emerald");
   }, [isdark]);
 
-  const user = {
-    fullName: "علی شاهنوشی",
-    photo: "/src/assets/images/user.png",
-  };
-  // const { user } = useUser();
-  // const { fullName, avatar } = user.user_metadata;
+  const { user } = useUser();
+  const { fullName, avatar } = user.user_metadata;
 
   return (
     <header className="border-b border-slate-700 flex gap-[1rem] py-4 px-8 items-center justify-end">
       <div className="flex gap-[1rem] items-center justify-end">
-        <span>{user.fullName}</span>
+        <span>{fullName}</span>
         <img
-          src={user.photo}
-          alt={user.fullName}
+          src={avatar || "default-user.jpg"}
+          alt={fullName}
           className="w-[44px] rounded-full"
         />
       </div>
