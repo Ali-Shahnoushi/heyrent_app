@@ -64,8 +64,6 @@ export default function CarForm({ carObject = {}, name: modalName }) {
     }
   }
 
-  console.log(control._defaultValues);
-
   return (
     <>
       <dialog

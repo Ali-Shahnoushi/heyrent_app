@@ -18,9 +18,8 @@ import {
   BiTrash,
   BiUpArrowAlt,
 } from "react-icons/bi";
-import { FaAngleLeft, FaAngleRight, FaEye } from "react-icons/fa6";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { useGetCoupons } from "./useCoupons";
-import { Link } from "react-router-dom";
 import { useDeleteCoupon } from "./useDeleteCoupon";
 import CouponForm from "./CouponForm";
 
@@ -100,6 +99,7 @@ export default function CouponTable() {
     },
     {
       accessorKey: "id",
+      header: "",
       enableSorting: false,
       cell: (props) => (
         <span className="flex gap-2">
@@ -168,8 +168,9 @@ export default function CouponTable() {
   return (
     <div className="overflow-x-auto">
       <h2 className="text-2xl mb-8 font-semibold">لیست تخفیف‌ها</h2>
-      <div className="flex items-center">
+      <div className="flex items-center mb-2">
         <TableFilter
+          field="name"
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
         />

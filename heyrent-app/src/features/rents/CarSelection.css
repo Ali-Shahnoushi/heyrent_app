@@ -1,0 +1,42 @@
+input[type="radio"]:checked + label li {
+  background: oklch(var(--p));
+}
+input[type="radio"]:checked + label li h3 {
+  color: color-mix(
+    in oklab,
+    oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+    black
+  );
+}
+input[type="radio"] {
+  display: none;
+}
+ul {
+  --sb-track-color: color-mix(
+    in oklab,
+    oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+    black
+  );
+  --sb-thumb-color: oklch(var(--p));
+  --sb-size: 14px;
+}
+
+ul::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+ul::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 20px;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 20px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  ul {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}

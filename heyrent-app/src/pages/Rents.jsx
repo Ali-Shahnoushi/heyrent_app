@@ -1,7 +1,9 @@
-import React from 'react'
+import RentsTable from "./../features/rents/RentsTable";
 
 export default function Rents() {
   return (
-    <div>Rents</div>
-  )
+    <div>
+      <RentsTable />
+    </div>
+  );
 }

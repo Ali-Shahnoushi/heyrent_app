@@ -1,8 +1,12 @@
 import React from "react";
 import { BiSearch } from "react-icons/bi";
 
-export default function TableFilter({ columnFilters, setColumnFilters }) {
-  const carName = columnFilters.find((f) => f.id === "name")?.value || "";
+export default function TableFilter({
+  columnFilters,
+  setColumnFilters,
+  field,
+}) {
+  const carName = columnFilters.find((f) => f.id === field)?.value || "";
 
   const onFilterChange = (id, value) =>
     setColumnFilters((prev) =>
@@ -26,7 +30,7 @@ export default function TableFilter({ columnFilters, setColumnFilters }) {
       <label className="input input-primary transition-all duration-100 input-bordered flex items-center gap-2 mr-3">
         <input
           value={carName}
-          onChange={(e) => onFilterChange("name", e.target.value)}
+          onChange={(e) => onFilterChange(field, e.target.value)}
           type="text"
           className="grow "
           placeholder="جستجو کن..."

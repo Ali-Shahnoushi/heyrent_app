@@ -5,7 +5,22 @@ export async function getCoupons() {
 
   if (error) {
     console.error(error);
-    throw new Error("coupons could not be loaded");
+    throw new Error("کد های تخفیف بارگذاری نشد");
+  }
+
+  return data;
+}
+
+export async function useCoupon(couponName) {
+  const { data, error } = await supabase
+    .from("coupons")
+    .select("*")
+    .eq("name", couponName)
+    .single();
+
+  if (error) {
+    console.log(error);
+    throw new Error("مشکلی در استفاده از کد تخفیف بوجود آمد");
   }
 
   return data;

@@ -4,7 +4,7 @@ export async function getUsers() {
   const {
     data: { users },
     error,
-  } = await supabase.auth.admin.listUsers();
+  } = await supabase.auth.api.listUsers();
 
   if (error) {
     console.error(error);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useGetCars } from "./useCars";
 import Spinner from "../../components/Spinner";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import {
   flexRender,
   getCoreRowModel,
@@ -10,107 +11,98 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import TableFilter from "../../components/TableFilter";
-import {
-  BiCheck,
-  BiDownArrowAlt,
-  BiSolidEdit,
-  BiSort,
-  BiTrash,
-  BiUpArrowAlt,
-} from "react-icons/bi";
-import { IoMdClose } from "react-icons/io";
+import { BiDownArrowAlt, BiSort, BiTrash, BiUpArrowAlt } from "react-icons/bi";
 import { FaAngleLeft, FaAngleRight, FaEye } from "react-icons/fa6";
-import { useDeleteCar } from "./useDeleteCar";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import CarForm from "./CarForm";
+import { useGetRents } from "./useRents";
+import { useDeleteRent } from "./useDeleteRent";
 import { Link } from "react-router-dom";
+import RentForm from "./RentForm";
 
-const healths = {
-  "A+": {
-    color: "bg-teal-700",
-  },
-  A: {
-    color: "bg-lime-600",
-  },
-  B: {
-    color: "bg-yellow-500",
-  },
-  C: {
-    color: "bg-orange-500",
-  },
-};
-
-export default function CarsTable() {
+export default function CouponTable() {
   const MySwal = withReactContent(Swal);
-  const { cars, isLoading, error } = useGetCars();
+
+  const { error, isLoading, rents } = useGetRents();
   const [columnFilters, setColumnFilters] = useState([]);
-  const { deleteCar, isDeleting } = useDeleteCar();
+  const { deleteRent, isDeleting } = useDeleteRent();
+
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 4,
+    pageSize: 10,
   });
 
   const columns = [
     {
-      accessorKey: "image",
-      header: "تصویر",
+      accessorKey: "customer_name",
+      header: "نام اجاره‌گیرنده",
       enableSorting: false,
       cell: (props) => (
         <div className="flex items-center gap-3">
-          <div className="avatar">
-            <div className="mask mask-hexagon w-16 h-16">
-              <img src={props.getValue()} alt="Avatar Tailwind CSS Component" />
+          <div>
+            <div>{props.getValue() || "-"}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      accessorKey: "status",
+      header: "وضعیت اجاره",
+      cell: (props) => (
+        <div className="flex items-center gap-3">
+          <div>
+            <div>
+              {props.getValue() === "unconfirmed" ? (
+                <div className="badge badge-error">تایید نشده</div>
+              ) : props.getValue() === "checked" ? (
+                <div className="badge badge-accent">تایید شده</div>
+              ) : props.getValue() === "paid" ? (
+                <div className="badge badge-warning">پرداخت شده</div>
+              ) : (
+                "-"
+              )}
             </div>
           </div>
         </div>
       ),
     },
     {
-      accessorKey: "name",
-      header: "نام",
-      size: 300,
+      accessorKey: "daysCount",
+      header: "تعداد روز اجاره",
+      size: 200,
       cell: (props) => (
         <div className="flex items-center gap-3">
           <div>
-            <div className="brand text-xl font-bold">{props.getValue()}</div>
-            <div className="brand text-lg opacity-50">USA</div>
+            <div className="text-lg">{props.getValue() || "-"}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      accessorKey: "customer_phone",
+      header: "شماره تماس گیرنده",
+      enableSorting: false,
+      cell: (props) => (
+        <div className="flex items-center gap-3">
+          <div>
+            <div className="text-lg">{props.getValue() || "-"}</div>
           </div>
         </div>
       ),
     },
 
     {
-      accessorKey: "seat",
-      header: "تعداد صندلی‌ها",
+      accessorKey: "carId",
+      header: "شناسه خودرو",
+      enableSorting: false,
       cell: (props) => (
-        <div className="flex justify-center">
-          <p className="text-2xl">{props.getValue()}</p>,
+        <div className="flex items-center gap-3 ">
+          <div>
+            <div>
+              <Link className="text-lg" to={`/cars/${props.getValue()}`}>
+                {props.getValue()}
+              </Link>
+            </div>
+          </div>
         </div>
-      ),
-    },
-    {
-      accessorKey: "health",
-      header: "سلامت خودرو",
-      cell: (props) => (
-        <div className="flex justify-center">
-          <span
-            className={`rounded-badge brand font-black text-white w-7 h-7 flex items-center justify-center ${
-              healths[props.getValue()].color
-            }`}
-          >
-            {props.getValue()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      accessorKey: "gearbox",
-      header: "دنده اتوماتیک",
-      cell: (props) => (
-        <span className="text-xl flex items-center justify-center">
-          {props.getValue() ? <BiCheck /> : <IoMdClose />}
-        </span>
       ),
     },
     {
@@ -119,39 +111,33 @@ export default function CarsTable() {
       enableSorting: false,
       cell: (props) => (
         <span className="flex gap-2">
-          <CarForm
-            name={`edit-${props.getValue()}`}
-            carObject={{ id: props.getValue(), ...props.row.original }}
-          />
+          <RentForm />
 
           <button
             onClick={() => {
-              editCarHandle(`edit-${props.getValue()}`);
+              editCouponHandle(`edit-${props.getValue()}`);
             }}
             className="btn text-xl text-blue-400 btn-circle"
           >
-            <BiSolidEdit />
+            <FaEye />
           </button>
           <button
             className="btn text-xl text-red-500 btn-circle"
             onClick={() => {
-              deleteCarHandle(props.getValue());
+              deleteRentHandle(props.getValue());
             }}
           >
             <BiTrash />
           </button>
-          <Link to={`/cars/${props.getValue()}`}>
-            <button className="btn text-xl text-slate-500 btn-circle">
-              <FaEye />
-            </button>
-          </Link>
         </span>
       ),
     },
   ];
 
+  console.log(rents);
+
   const table = useReactTable({
-    data: cars,
+    data: rents,
     columns,
     state: { columnFilters, pagination },
     getFilteredRowModel: getFilteredRowModel(),
@@ -161,7 +147,7 @@ export default function CarsTable() {
     onPaginationChange: setPagination,
   });
 
-  function deleteCarHandle(carId) {
+  function deleteRentHandle(rentId) {
     MySwal.fire({
       title: "آیا از حذف مطمئنید؟",
       icon: "warning",
@@ -174,12 +160,12 @@ export default function CarsTable() {
       color: "var(--fallback-bc,oklch(var(--bc)/1))",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteCar(carId);
+        deleteRent(rentId);
       }
     });
   }
 
-  function editCarHandle(modalID) {
+  function editCouponHandle(modalID) {
     document.getElementById(modalID).classList.add("modal-open");
   }
 
@@ -187,10 +173,10 @@ export default function CarsTable() {
 
   return (
     <div className="overflow-x-auto">
-      <h2 className="text-2xl mb-8 font-semibold">لیست ماشین‌ها</h2>
+      <h2 className="text-2xl mb-8 font-semibold">لیست اجاره‌ها</h2>
       <div className="flex items-center mb-2">
         <TableFilter
-          field="name"
+          field="customer_name"
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
         />
@@ -270,16 +256,12 @@ export default function CarsTable() {
           )}
         </div>
         <div className="my-2">
-          <CarForm />
+          <RentForm />
           <button
             className="btn btn-primary font-normal btn-md"
-            onClick={() =>
-              document
-                .getElementById("car_form_modal")
-                .classList.add("modal-open")
-            }
+            onClick={() => document.getElementById("rent_modal").showModal()}
           >
-            افزودن خودرو
+            افزودن اجاره
           </button>
         </div>
       </div>
