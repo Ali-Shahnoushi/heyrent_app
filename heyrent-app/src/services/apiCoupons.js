@@ -26,6 +26,7 @@ export async function useCoupon(couponName) {
   return data;
 }
 
+
 export async function createCoupon(newCoupon) {
   // 1. Create/edit Car
   let query = supabase.from("coupons");

@@ -48,7 +48,7 @@ export default function RentForm() {
       {...data}
       updateFields={updateFields}
     />,
-    <RentDataForm {...data} updateFields={updateFields} />,
+    <RentDataForm {...data} carData={carData} updateFields={updateFields} />,
 
     <FinalSubmitForm {...data} carData={carData} updateFields={updateFields} />,
   ]);

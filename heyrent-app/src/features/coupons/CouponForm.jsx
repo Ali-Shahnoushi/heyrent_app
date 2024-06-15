@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateCoupon } from "./useCreateCoupon";
 import { useEditCoupon } from "./useEditCoupon";
@@ -8,7 +8,16 @@ export default function CouponForm({ couponObject = {}, name: modalName }) {
   const { id: editId, ...editValues } = couponObject;
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, reset, formState, control } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setError,
+    reset,
+    formState,
+    control,
+    getValues,
+    watch,
+  } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
@@ -16,11 +25,24 @@ export default function CouponForm({ couponObject = {}, name: modalName }) {
   const { createCoupon, isCreating } = useCreateCoupon();
   const isWorking = isEditing || isCreating;
   const { errors } = formState;
+  const amount = watch("amount");
+  const percent = watch("percent");
 
   function onSubmit(data) {
+    if (!amount && !percent) {
+      setError("amount", { message: "Test" });
+      setError("percent", { message: "Test" });
+      return;
+    }
+
+    const finalData = {
+      ...data,
+      percent: !data.percent ? 0 : data.percent,
+      amount: !data.amount ? 0 : data.amount,
+    };
     if (!isEditSession) {
       createCoupon(
-        { ...data },
+        { ...finalData },
         {
           onSuccess: () => {
             document
@@ -34,7 +56,7 @@ export default function CouponForm({ couponObject = {}, name: modalName }) {
     // on edit
     else {
       editCoupon(
-        { newCouponData: data, id: editId },
+        { newCouponData: finalData, id: editId },
         {
           onSuccess: () => {
             document
@@ -63,7 +85,6 @@ export default function CouponForm({ couponObject = {}, name: modalName }) {
                   disabled={isWorking}
                   className="input input-md transition-all duration-100 input-bordered input-primary w-full max-w-xs"
                   type="text"
-                  // defaultValue={name}
                   placeholder="کد کوپن را وارد کنید"
                   {...register("name", {
                     required: "این فیلد ضروری است",
@@ -76,14 +97,11 @@ export default function CouponForm({ couponObject = {}, name: modalName }) {
               <label className="flex flex-col w-[25%] items-start gap-2">
                 <span>درصد تخفیف</span>
                 <input
-                  disabled={isWorking}
+                  disabled={isWorking || Boolean(amount)}
                   className="input input-md transition-all duration-100 input-bordered input-primary w-full max-w-xs"
                   type="number"
-                  // defaultValue={pricePerDay}
                   placeholder="مقدار درصد تخفیف را وارد کنید"
-                  {...register("percent", {
-                    required: "این فیلد ضروری است",
-                  })}
+                  {...register("percent")}
                 />
                 <span className="text-xs text-red-500">
                   {errors?.percent?.message}
@@ -92,13 +110,11 @@ export default function CouponForm({ couponObject = {}, name: modalName }) {
               <label className="flex flex-col w-[25%] items-start gap-2">
                 <span>مبلغ تخفیف</span>
                 <input
-                  disabled={isWorking}
+                  disabled={isWorking || Boolean(percent)}
                   className="input input-md transition-all duration-100 input-bordered input-primary w-full max-w-xs"
                   type="number"
                   placeholder="مبلغ تخفیف را وارد کنید"
-                  {...register("amount", {
-                    required: "این فیلد ضروری است",
-                  })}
+                  {...register("amount")}
                 />
                 <span className="text-xs text-red-500">
                   {errors?.amount?.message}

@@ -4,8 +4,24 @@ export default {
   theme: {
     extend: {},
   },
+  darkMode: "selector",
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["emerald", "dark"],
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "blue",
+          secondary: "teal",
+        },
+      },
+      {
+        dark: {
+          ...require("daisyui/src/theming/themes")["dark"],
+          primary: "blue",
+          secondary: "teal",
+        },
+      },
+    ],
   },
 };

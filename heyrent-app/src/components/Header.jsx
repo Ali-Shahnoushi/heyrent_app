@@ -13,9 +13,13 @@ export default function Header() {
   );
   useEffect(() => {
     localStorage.setItem("isdark", JSON.stringify(isdark));
-    if (isdark)
+    if (isdark) {
       document.querySelector("html").setAttribute("data-theme", "dark");
-    else document.querySelector("html").setAttribute("data-theme", "emerald");
+      document.querySelector("html").setAttribute("class", "dark");
+    } else {
+      document.querySelector("html").setAttribute("data-theme", "light");
+      document.querySelector("html").setAttribute("class", "light");
+    }
   }, [isdark]);
 
   const { user } = useUser();
@@ -28,7 +32,7 @@ export default function Header() {
         <img
           src={avatar || "default-user.jpg"}
           alt={fullName}
-          className="w-[44px] rounded-full"
+          className="w-[44px] h-[44px] object-cover object-center rounded-full"
         />
       </div>
       <div className="flex gap-[1rem] items-center justify-end">

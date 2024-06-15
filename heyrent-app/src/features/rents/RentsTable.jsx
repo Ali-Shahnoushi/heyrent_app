@@ -113,14 +113,12 @@ export default function CouponTable() {
         <span className="flex gap-2">
           <RentForm />
 
-          <button
-            onClick={() => {
-              editCouponHandle(`edit-${props.getValue()}`);
-            }}
+          <Link
+            to={`/rents/${props.getValue()}`}
             className="btn text-xl text-blue-400 btn-circle"
           >
             <FaEye />
-          </button>
+          </Link>
           <button
             className="btn text-xl text-red-500 btn-circle"
             onClick={() => {
@@ -163,10 +161,6 @@ export default function CouponTable() {
         deleteRent(rentId);
       }
     });
-  }
-
-  function editCouponHandle(modalID) {
-    document.getElementById(modalID).classList.add("modal-open");
   }
 
   if (isLoading) return <Spinner />;

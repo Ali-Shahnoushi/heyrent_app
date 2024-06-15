@@ -8,7 +8,7 @@ import StyledNavLink from "./StyledNavLink";
 export default function Sidebar() {
   return (
     <aside className="bg-gray-0 py-[2.4rem] px-[1.8rem] border-l border-slate-700 row-start-1 row-end-[-1]">
-      <BrandLogo />{" "}
+      <BrandLogo /> <p className="text-black dark:text-white">Teting</p>
       <nav className="mt-7">
         <ul className="flex flex-col gap-[0.75rem]">
           <li>

@@ -5,15 +5,16 @@ export default function RentDataForm({
   endDate,
   updateFields,
   carPrice,
+  deposit,
 }) {
   const dateStartInput = useRef(null);
   const dateEndInput = useRef(null);
   function submitData() {
     const date1 = new Date(dateStartInput.current.value);
     const date2 = new Date(dateEndInput.current.value);
-    const rentDays = date2.getDate() - date1.getDate();
+    const rentDays = Math.abs(date2.getDate() - date1.getDate());
 
-    const totalPrice = carPrice * rentDays;
+    const totalPrice = carPrice * rentDays + deposit;
 
     updateFields({
       endDate: dateEndInput.current.value,
@@ -22,7 +23,7 @@ export default function RentDataForm({
       totalPrice,
     });
 
-    if (rentDays <= 0) dateEndInput.current.value = null;
+    if (date2 < date1) dateEndInput.current.value = null;
   }
 
   return (

@@ -9,6 +9,7 @@ export default function FinalSubmitForm({
   deposit,
   carPrice,
   totalPrice,
+  updateFields,
 }) {
   const { data, error, isPending: isLoading, mutate } = useCoupon();
   const finalPrice = useMemo(() => {
@@ -16,7 +17,7 @@ export default function FinalSubmitForm({
     if (data.percent > 0) {
       return totalPrice - (totalPrice * data.percent) / 100;
     }
-    return data.amount;
+    return totalPrice - data.amount;
   }, [data, totalPrice]);
 
   console.log(carData);
@@ -24,6 +25,9 @@ export default function FinalSubmitForm({
   function handleUseCoupon(e) {
     // const { value } = e.target;
     mutate(e.target.value);
+    updateFields({
+      totalPrice: finalPrice,
+    });
   }
 
   return (

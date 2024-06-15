@@ -74,7 +74,8 @@
 
 select:disabled,
 input:disabled {
-  background: #363f48;
+  /* background: #363f48; */
+  @apply dark:bg-neutral bg-slate-200;
 }
 
 div {

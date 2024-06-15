@@ -51,7 +51,7 @@ export default function CarDetails() {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteCar(carId);
-        navigate('/cars');
+        navigate("/cars");
       }
     });
   }
