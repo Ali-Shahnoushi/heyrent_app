@@ -81,7 +81,7 @@ export async function getStaysTodayActivity() {
     .from("rents")
     .select("*")
     .or(
-      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked,endDate.eq.${getToday()})`
+      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.paid,endDate.eq.${getToday()})`
     )
     .order("created_at");
 

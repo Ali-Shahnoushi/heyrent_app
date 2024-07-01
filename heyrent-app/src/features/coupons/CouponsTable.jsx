@@ -80,7 +80,7 @@ export default function CouponTable() {
       cell: (props) => (
         <div className="flex items-center gap-3">
           <div>
-            <div className="brand font-bold">{props.getValue() || "-"}</div>
+            <div>{props.getValue().toLocaleString("fa-IR") || "-"}</div>
           </div>
         </div>
       ),
@@ -92,7 +92,7 @@ export default function CouponTable() {
       cell: (props) => (
         <div className="flex items-center gap-3">
           <div>
-            <div className="brand font-bold">{props.getValue() || "-"}</div>
+            <div>{props.getValue().toLocaleString("fa-IR") || "-"}</div>
           </div>
         </div>
       ),
@@ -227,8 +227,8 @@ export default function CouponTable() {
       <div className="flex justify-start items-center gap-4 mt-2">
         <div className="flex flex-col items-center gap-2 w-[100px]">
           <p>
-            صفحه {table.getState().pagination.pageIndex + 1} از{" "}
-            {table.getPageCount()}
+            صفحه {(table.getState().pagination.pageIndex + 1).toLocaleString("fa-IR")} از{" "}
+            {table.getPageCount().toLocaleString("fa-IR")}
           </p>
           {table.getPageCount() > 1 && (
             <span className="flex gap-3">

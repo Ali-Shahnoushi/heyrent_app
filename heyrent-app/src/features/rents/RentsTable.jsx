@@ -71,7 +71,9 @@ export default function CouponTable() {
       cell: (props) => (
         <div className="flex items-center gap-3">
           <div>
-            <div className="text-lg">{props.getValue() || "-"}</div>
+            <div className="text-lg">
+              {props.getValue().toLocaleString("fa-IR") || "-"}
+            </div>
           </div>
         </div>
       ),
@@ -83,7 +85,9 @@ export default function CouponTable() {
       cell: (props) => (
         <div className="flex items-center gap-3">
           <div>
-            <div className="text-lg">{props.getValue() || "-"}</div>
+            <div className="text-lg">
+              {props.getValue().toLocaleString("fa") || "-"}
+            </div>
           </div>
         </div>
       ),
@@ -98,7 +102,7 @@ export default function CouponTable() {
           <div>
             <div>
               <Link className="text-lg" to={`/cars/${props.getValue()}`}>
-                {props.getValue()}
+                {props.getValue().toLocaleString("fa-IR")}
               </Link>
             </div>
           </div>
@@ -115,7 +119,7 @@ export default function CouponTable() {
 
           <Link
             to={`/rents/${props.getValue()}`}
-            className="btn text-xl text-blue-400 btn-circle"
+            className="btn text-xl text-slate-500 btn-circle"
           >
             <FaEye />
           </Link>
@@ -227,8 +231,11 @@ export default function CouponTable() {
       <div className="flex justify-start items-center gap-4 mt-2">
         <div className="flex flex-col items-center gap-2 w-[100px]">
           <p>
-            صفحه {table.getState().pagination.pageIndex + 1} از{" "}
-            {table.getPageCount()}
+            صفحه{" "}
+            {(table.getState().pagination.pageIndex + 1).toLocaleString(
+              "fa-IR"
+            )}{" "}
+            از {table.getPageCount().toLocaleString("fa-IR")}
           </p>
           {table.getPageCount() > 1 && (
             <span className="flex gap-3">

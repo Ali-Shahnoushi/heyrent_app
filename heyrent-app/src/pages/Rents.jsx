@@ -4,6 +4,7 @@ export default function Rents() {
   return (
     <div>
       <RentsTable />
+      
     </div>
   );
 }

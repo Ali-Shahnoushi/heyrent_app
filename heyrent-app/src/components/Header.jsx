@@ -4,9 +4,11 @@ import StyledNavLink from "./StyledNavLink";
 import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
 import { useLogout } from "../features/authentication/useLogout";
+import { useDarkMode } from "../contexts/DarkModeContext";
 
 export default function Header() {
   const { isLoggingOut, logout } = useLogout();
+  const { toggleDarkMode } = useDarkMode();
 
   const [isdark, setIsdark] = useState(
     JSON.parse(localStorage.getItem("isdark"))
@@ -48,7 +50,10 @@ export default function Header() {
             type="checkbox"
             className="theme-controller"
             checked={isdark}
-            onChange={() => setIsdark(!isdark)}
+            onChange={() => {
+              setIsdark(!isdark);
+              toggleDarkMode();
+            }}
           />
 
           {/* sun icon */}

@@ -46,7 +46,7 @@ export default function LoginForm() {
             value={email}
             autoComplete="username"
             className="input input-md transition-all duration-100 input-bordered input-primary w-full"
-            type="text"
+            type="email"
             placeholder="ایمیل خودرو را وارد کنید"
           />
           {/* <span className="text-xs text-red-500">{errors?.name?.message}</span> */}

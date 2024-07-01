@@ -122,7 +122,7 @@ export default function CouponForm({ couponObject = {}, name: modalName }) {
               </label>
 
               <label className="flex flex-col w-[32%] items-start gap-2">
-                <span>تعداد صندلی</span>
+                <span>تاریخ انقضا</span>
                 <input
                   disabled={isWorking}
                   className="input input-md transition-all duration-100 input-bordered input-primary w-full max-w-xs"

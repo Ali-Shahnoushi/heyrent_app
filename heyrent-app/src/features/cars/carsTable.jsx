@@ -85,7 +85,8 @@ export default function CarsTable() {
       header: "تعداد صندلی‌ها",
       cell: (props) => (
         <div className="flex justify-center">
-          <p className="text-2xl">{props.getValue()}</p>,
+          <p className="text-2xl">{props.getValue().toLocaleString("fa-IR")}</p>
+          ,
         </div>
       ),
     },
@@ -247,8 +248,11 @@ export default function CarsTable() {
       <div className="flex justify-start items-center gap-4 mt-2">
         <div className="flex flex-col items-center gap-2 w-[100px]">
           <p>
-            صفحه {table.getState().pagination.pageIndex + 1} از{" "}
-            {table.getPageCount()}
+            صفحه{" "}
+            {(table.getState().pagination.pageIndex + 1).toLocaleString(
+              "fa-IR"
+            )}{" "}
+            از {table.getPageCount().toLocaleString("fa-IR")}
           </p>
           {table.getPageCount() > 1 && (
             <span className="flex gap-3">

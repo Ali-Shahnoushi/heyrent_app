@@ -22,7 +22,7 @@ const SettingsForm = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="p-6 w-full rounded-lg">
+    <div className="w-full rounded-lg">
       <h2 className="text-2xl mb-8 font-semibold">بروزرسانی تنظیمات وب‌سایت</h2>
       <form>
         <div className="gap-6 flex flex-col">
