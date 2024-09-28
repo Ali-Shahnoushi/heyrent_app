@@ -36,7 +36,7 @@ export default function CarSelection({ carId, updateFields, updateCar }) {
               htmlFor={`car-${car.id}`}
               className="aria-selected:bg-primary"
             >
-              <li className="bg-neutral mb-2 flex rounded-md flex-row items-center justify-between gap-4 p-2">
+              <li className="bg-slate-200 dark:bg-neutral mb-2 flex rounded-md flex-row items-center justify-between gap-4 p-2">
                 <span className="flex gap-2 items-center">
                   <img
                     className="w-[128px] rounded-lg"
