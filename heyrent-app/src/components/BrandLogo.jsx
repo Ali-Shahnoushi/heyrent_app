@@ -7,7 +7,7 @@ export default function BrandLogo({ showSlogan = true }) {
   if (!isLoading)
     return (
       <div>
-        <span className="text-4xl brand">{settings.logoName}</span>
+        <span className="text-4xl brand">!Heyrent</span>
         {showSlogan && <p className="text-xs text-right">{settings.slogan}</p>}
       </div>
     );

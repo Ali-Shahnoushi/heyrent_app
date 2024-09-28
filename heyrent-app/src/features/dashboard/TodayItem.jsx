@@ -16,7 +16,7 @@ export default function TodayItem({ activity }) {
       )}
 
       <div>{customer_name}</div>
-      <div>{daysCount.toLocaleString('fa-IR')} روز</div>
+      <div>{daysCount.toLocaleString("fa-IR")} روز</div>
 
       {status === "unconfirmed" && (
         <Link to={`/rents/${id}`} size="sm" varitaion="primary">
