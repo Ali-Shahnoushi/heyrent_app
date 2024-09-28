@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function PageNotFound() {
+  useEffect(() => {
+    document.title = `404 Error | Page not found`;
+  }, []);
   return (
     <div className="flex items-center justify-center h-svh">
       <div className="flex items-center flex-col">

@@ -14,8 +14,12 @@ import CarItem from "../components/CarItem";
 import { useDeleteCar } from "../features/cars/useDeleteCar";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useEffect } from "react";
 
 export default function CarDetails() {
+  useEffect(() => {
+    document.title = `${name} | HEYRENT!`;
+  }, []);
   const { deleteCar, isDeleting } = useDeleteCar();
   const { car, isLoading } = useCar();
   const navigate = useNavigate();

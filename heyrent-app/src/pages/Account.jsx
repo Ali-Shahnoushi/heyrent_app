@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UpdateUserDataForm from "../features/authentication/UpdateUserDataForm";
 import UpdateUserPasswordForm from "../features/authentication/UpdateUserPasswordForm";
 
 export default function Account() {
+  useEffect(() => {
+    document.title = "Account details - HEYRENT!";
+  }, []);
   return (
     <div className="flex flex-row justify-between">
       <div className="w-1/2">

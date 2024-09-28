@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginForm from "../features/authentication/LoginForm";
 
 export default function Login() {
+  useEffect(() => {
+    document.title = `Login | HEYRENT!`;
+  }, []);
   // Function to randomly select an image URL from the array
   function getRandomImageUrl() {
     const imageUrls = [

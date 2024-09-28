@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRent } from "../features/rents/useRent";
 import moment from "jalali-moment";
 import Spinner from "../components/Spinner";
@@ -10,6 +10,9 @@ import { useDeleteRent } from "../features/rents/useDeleteRent";
 
 export default function SingleRent() {
   const { isLoading, rent } = useRent();
+  useEffect(() => {
+    document.title = `Rent #${rent.id} | HEYRENT!`;
+  }, []);
   const { checkin, isCheckingIn } = useCheckin();
   const { checkout, isCheckingOut } = useCheckout();
   const { deleteRent, isDeleting } = useDeleteRent();
@@ -80,7 +83,9 @@ export default function SingleRent() {
                 .locale("fa")
                 .format("YYYY/MM/DD")}
             </div>
-            <div className="px-2">مدت اجاره: {rent.daysCount.toLocaleString("fa-IR")} روز</div>
+            <div className="px-2">
+              مدت اجاره: {rent.daysCount.toLocaleString("fa-IR")} روز
+            </div>
             <div className="px-2">نام خودرو: {rent.cars.name}</div>
           </section>
           <section className="w-1/4 flex flex-col items-center justify-center gap-3">
