@@ -9,10 +9,10 @@ export default function TodayItem({ activity }) {
   return (
     <div className="grid grid-cols-[7rem_7rem_4rem_7rem_6rem] gap-3 items-center text-sm py-2 border-b border-gray-200">
       {status === "unconfirmed" && (
-        <span className="badge badge-lg badge-accent">ثبت شده</span>
+        <span className="badge text-white badge-lg badge-accent">ثبت شده</span>
       )}
       {status === "paid" && (
-        <span className="badge badge-lg badge-info">پرداخت شده</span>
+        <span className="badge text-white badge-lg badge-info">پرداخت شده</span>
       )}
 
       <div>{customer_name}</div>
@@ -20,7 +20,7 @@ export default function TodayItem({ activity }) {
 
       {status === "unconfirmed" && (
         <Link to={`/rents/${id}`} size="sm" varitaion="primary">
-          <button className="btn btn-sm btn-warning font-light">
+          <button className="btn btn-sm text-white btn-warning font-light">
             پرداخت اجاره
           </button>
         </Link>

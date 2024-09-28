@@ -11,7 +11,7 @@ import { useDeleteRent } from "../features/rents/useDeleteRent";
 export default function SingleRent() {
   const { isLoading, rent } = useRent();
   useEffect(() => {
-    document.title = `Rent #${rent.id} | HEYRENT!`;
+    document.title = `Rent #${rent?.id} | HEYRENT!`;
   }, []);
   const { checkin, isCheckingIn } = useCheckin();
   const { checkout, isCheckingOut } = useCheckout();

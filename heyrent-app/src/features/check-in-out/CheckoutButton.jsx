@@ -5,7 +5,7 @@ function CheckoutButton({ rentId }) {
 
   return (
     <button
-      className="btn btn-sm btn-success font-light"
+      className="btn btn-sm text-white btn-success font-light"
       onClick={() => {
         checkout(rentId);
       }}
