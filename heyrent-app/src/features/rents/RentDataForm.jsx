@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { useGetSettings } from "../settings/useSettings";
+import { toast } from "react-hot-toast";
 
 export default function RentDataForm({
   startDate,
@@ -9,6 +11,7 @@ export default function RentDataForm({
 }) {
   const dateStartInput = useRef(null);
   const dateEndInput = useRef(null);
+  const { error, isLoadingSetting, settings } = useGetSettings();
   function submitData() {
     const date1 = new Date(dateStartInput.current.value);
     const date2 = new Date(dateEndInput.current.value);
@@ -24,6 +27,20 @@ export default function RentDataForm({
     });
 
     if (date2 < date1) dateEndInput.current.value = null;
+
+    if (rentDays <= settings.minRentDay) {
+      console.log("date error");
+
+      toast.error(
+        `حداقل تعداد روز برای ثبت اجاره ${settings.minRentDay} روز است`,
+        {
+          duration: 3000,
+        }
+      );
+      dateEndInput.current.value = null;
+
+      return;
+    }
   }
 
   return (
