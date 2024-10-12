@@ -4,7 +4,7 @@ import DashboardFilter from "../features/dashboard/DashboardFilter";
 
 export default function Dashboard() {
   useEffect(() => {
-    document.title = `Dashboard | HEYRENT!`;
+    document.title = `dashboard | HEYRENT!`;
   }, []);
   return (
     <>
